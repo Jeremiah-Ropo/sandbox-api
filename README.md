@@ -30,16 +30,42 @@ This project is a minimal NestJS-based backend that enables users to define and 
 git clone https://github.com/Jeremiah-Ropo/sandbox-api.git
 cd sandox-api
 
-
+```
 
 ### 2. Install dependencies
 
 ```bash
 yarn install
+
+```
 ### 3. Run the server
 
 ```bash
 yarn start:dev
+
+```
+
+### 4. Test the API (save a custom API config)
+
+```bash
+curl -X POST
+http://localhost:3000/config
+-H "Content-Type: application/json"
+-d '
+{
+  "name": "test-api",
+  "method": "POST",
+  "body": {
+    "email": "",
+    "username": ""
+  },
+  "customValidation": "function customValidation(data) {\n  const email = data.body.email;\n  if (!email) {\n    return { isValid: false, message: 'Email is required.' };\n  }\n  const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n  if (!emailRegex.test(email)) {\n    return { isValid: false, message: 'Email is invalid.' };\n  }\n  return { isValid: true, message: 'Email is valid.' };\n}"
+}
+'
+
+```
+
+---
 
 
 
