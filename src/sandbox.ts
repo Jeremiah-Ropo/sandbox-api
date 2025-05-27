@@ -8,7 +8,7 @@ export const runSandboxedCode = async (
     timeout: 100,
     sandbox: {
       data: {
-        payload,
+        body: payload,
       },
     },
   });
@@ -18,12 +18,7 @@ export const runSandboxedCode = async (
       `const customValidation = ${code}; 
          customValidation(data);`,
     );
-    if (
-      typeof result !== 'object' ||
-      result !== 'string' ||
-      result !== 'boolean' ||
-      result === null
-    ) {
+    if (typeof result !== 'object' || result === null) {
       throw new Error('Invalid validation result from the executed code');
     }
     return result;

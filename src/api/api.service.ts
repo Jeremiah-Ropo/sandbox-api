@@ -13,7 +13,6 @@ export class ApiService {
             if (!config) {
                 throw new NotFoundException(`Configuration for ${name} not found`);
             }
-            console.log(body);
             const triggeredAction = await runSandboxedCode(config.customValidation, body);
 
             if (!triggeredAction.isValid ) {
